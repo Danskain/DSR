@@ -1,0 +1,206 @@
+{
+    "type": "ok",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2OTQ3MjE0MTMsImV4cCI6MTY5NDgwNzgxMywiZGF0YSI6eyJpZCI6Imhhcm9sZCIsIjAiOiJlbWFpbD0-aGFyb2xkQGdyYXBoaWNzdGFmZi5jYSJ9fQ.8YeDONtAxoUiKquv2FbrRKnmJpJdO3jKYH3oxsmZmZg",
+    "token_exp": 1694807813,
+    "data": {
+        "navbar": [
+            {
+                "menu__id": "1",
+                "menu__label": "DSR",
+                "menu__url": "/dsr"
+            },
+            {
+                "menu__id": "2",
+                "menu__label": "DETRACK",
+                "menu__url": "/detrack"
+            },
+            {
+                "menu__id": "3",
+                "menu__label": "FLAGSHIP",
+                "menu__url": "/flagship"
+            },
+            {
+                "menu__id": "4",
+                "menu__label": "DHL",
+                "menu__url": "/dhl"
+            },
+            {
+                "menu__id": "5",
+                "menu__label": "MAGENTO",
+                "menu__url": "/magento"
+            },
+            {
+                "menu__id": "6",
+                "menu__label": "ACCOUNTING",
+                "menu__url": "/accounting"
+            },
+            {
+                "menu__id": "7",
+                "menu__label": "LINKS",
+                "menu__url": "/links"
+            },
+            {
+                "menu__id": "8",
+                "menu__label": "PRODUCT DIE",
+                "menu__url": "/product_die"
+            },
+            {
+                "menu__id": "9",
+                "menu__label": "PRODUCTION",
+                "menu__url": "/producction"
+            },
+            {
+                "menu__id": "10",
+                "menu__label": "TEMPLATE EMAIL STATUS",
+                "menu__url": "/template_email_status"
+            },
+            {
+                "menu__id": "11",
+                "menu__label": "HISTORY ISSUES",
+                "menu__url": "/history_issues"
+            },
+            {
+                "menu__id": "12",
+                "menu__label": "INVENTORY",
+                "menu__url": "/inventory"
+            }
+        ],
+        "tabs": [
+            {
+                "dsr_tab__id": "1",
+                "dsr_tab__label": "Urgents",
+                "dsr_tab__url": "/urgents",
+                "dsr_tab__fields_wheresql": null,
+                "dsr_Tab__color": "",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "2",
+                "dsr_tab__label": "Delivery Today",
+                "dsr_tab__url": "/delivery_today",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date < curdate() and dsr__est_shipping_date !='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'PR' and dsr__mg_status != 'hard_copy_proof'",
+                "dsr_Tab__color": "#28A745",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "3",
+                "dsr_tab__label": "Ship Today",
+                "dsr_tab__url": "/ship_today",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date= curdate() and dsr__est_shipping_date!='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'PR' and dsr__mg_status != 'hard_copy_proof'",
+                "dsr_Tab__color": "#28A745",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "4",
+                "dsr_tab__label": "Hard Copy Prof",
+                "dsr_tab__url": "/hard_copy_prof",
+                "dsr_tab__fields_wheresql": "dsr__mg_status != 'issues' and dsr__mg_status = 'hard_copy_proof'",
+                "dsr_Tab__color": "#FF4A2E",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "5",
+                "dsr_tab__label": "Sample Kit",
+                "dsr_tab__url": "/sample_kit",
+                "dsr_tab__fields_wheresql": "dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'SK' AND   dsr__mg_status = 'pending'",
+                "dsr_Tab__color": "#17A2B8",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "6",
+                "dsr_tab__label": "Prelim. Tomorrow",
+                "dsr_tab__url": "/prelim_tomorrow",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date = DATE_ADD(curdate(), INTERVAL 1  DAY) and dsr__est_shipping_date !='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'PR' and   dsr__mg_status != 'hard_copy_proof'",
+                "dsr_Tab__color": "#C91C02",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "7",
+                "dsr_tab__label": "Prelim.2nd Day",
+                "dsr_tab__url": "/prelim_2nd_day",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date = DATE_ADD(curdate(), INTERVAL 2  DAY) and dsr__est_shipping_date !='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'PR' and   dsr__mg_status != 'hard_copy_proof'",
+                "dsr_Tab__color": "#1988C8",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "8",
+                "dsr_tab__label": "Prelim. 3nd Day",
+                "dsr_tab__url": "/prelim_3nd_day",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date = DATE_ADD(curdate(), INTERVAL 3  DAY) and dsr__est_shipping_date !='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'PR' and   dsr__mg_status != 'hard_copy_proof'",
+                "dsr_Tab__color": "#FF4A2E",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "9",
+                "dsr_tab__label": "Prelim. After 3 Days",
+                "dsr_tab__url": "/prelim_After_3_days",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date > DATE_ADD(curdate(), INTERVAL 3  DAY) and dsr__est_shipping_date !='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'PR' and   dsr__mg_status != 'hard_copy_proof'",
+                "dsr_Tab__color": "#FFC107",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "10",
+                "dsr_tab__label": "DSR General",
+                "dsr_tab__url": "/dsr_general",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date !='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status !='closed' ",
+                "dsr_Tab__color": "#17A2B8",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "11",
+                "dsr_tab__label": "Without date",
+                "dsr_tab__url": "/without_date",
+                "dsr_tab__fields_wheresql": "dsr__est_shipping_date ='' and dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'",
+                "dsr_Tab__color": "#17A2B8",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "12",
+                "dsr_tab__label": "Completed Orders",
+                "dsr_tab__url": "/complete_orders",
+                "dsr_tab__fields_wheresql": "dsr__create_date >= now()-interval 3 month and dsr__mg_status = 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'",
+                "dsr_Tab__color": "#FFC107",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "13",
+                "dsr_tab__label": "SK to Follow",
+                "dsr_tab__url": "/sk_to_follow",
+                "dsr_tab__fields_wheresql": "dsr__mg_status != 'complete' AND dsr__mg_status != 'canceled' AND dsr__mg_status != 'closed' and dsr__mg_status != 'issues'  and   dsr__t_product = 'SK' and dsr__mg_status != 'hard_copy_proof'",
+                "dsr_Tab__color": "#FFC107",
+                "dsr_tab__icon": ""
+            },
+            {
+                "dsr_tab__id": "14",
+                "dsr_tab__label": "Issues",
+                "dsr_tab__url": "/issues",
+                "dsr_tab__fields_wheresql": null,
+                "dsr_Tab__color": "",
+                "dsr_tab__icon": ""
+            }
+        ]
+    },
+    "dataUser": [
+        {
+            "user__user": "harold",
+            "user__name": "Harold",
+            "user__fullname": "Gutierrez",
+            "user__email": "harold@graphicstaff.ca",
+            "user__profile_id": "1"
+        }
+    ],
+    "dataMenuUser": [
+        {
+            "menu_profile__id": "1",
+            "menu_profile__text": "settings"
+        },
+        {
+            "menu_profile__id": "2",
+            "menu_profile__text": "Create and Modify Users"
+        },
+        {
+            "menu_profile__id": "3",
+            "menu_profile__text": "Create and Modify Profiles"
+        }
+    ]
+}

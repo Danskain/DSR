@@ -1,0 +1,587 @@
+body {
+    /* background-color: #B0C4DF !important; */
+    background: linear-gradient(#00A1E0, #B0C4DF) !important;
+    /* background-color: white !important; */
+    height: 100vh;
+    width: 100%;
+}
+
+
+/* editar propiedades del DataGrid */
+/* .css-rtrcn9-MuiTablePagination-root {
+  color: white !important;
+}
+
+.css-zylse7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled {
+    color: white !important;
+}
+
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon {
+    color: white !important;
+}
+
+.css-ptiqhd-MuiSvgIcon-root {
+    fill: white !important;
+}
+
+.css-1vmtz29-MuiDataGrid-root .MuiDataGrid-row:hover, .css-1vmtz29-MuiDataGrid-root .MuiDataGrid-row.Mui-hovered {
+    background-color: white !important;
+} */
+
+/* @media (min-width: 600px) {   
+ .css-r6ewbb-MuiToolbar-root {
+    min-height: 50px !important
+ }
+}
+
+@media (min-width: 600px)
+{
+  .css-hyum1k-MuiToolbar-root {
+    min-height: 51px !important;
+  }
+} */
+
+/* .MuiTableHead-root {
+    background-color: #f01a36 !important;
+} */
+/* .MuiDataGrid-row:hover {
+    background-color: red;
+} */
+
+.MuiToolbar-root {
+    min-height: 50px !important
+}
+/* colores de las filas segun el evento */
+/* .default {
+    background-color: #454D55;
+}
+
+.approved {
+    background-color: #fdab87;
+}
+
+.diecut {
+    background-color: #1ea6f9;
+}
+
+.inpress {
+    background-color: #ffffaa;
+}
+
+.lostsamplekit {
+    background-color: #f01a36;
+}
+
+.partiallycomplete {
+    background-color: #e29cff;
+}
+
+.readyforscodix {
+    background-color: #1ea6f9;
+}
+
+.readyforpickup {
+    background-color: #82e889;
+}
+
+.readyforshipping {
+    background-color: #82e889;
+}
+
+.reprocessing {
+    background-color: #ff0000;
+}
+
+.reprocessinghpindigo {
+    background-color: #ff0000;
+}
+
+.reprocessingjpressplated {
+    background-color: #ff0000;
+}
+
+.reprocessingr500plated {
+    background-color: #ff0000;
+}
+
+.reprocessingricohplated {
+    background-color: #ff0000;
+}
+
+.tofollowup {
+    background-color: #F0ADD7;
+} */
+
+/* estilos formulario Usuario */
+
+.custom-label {
+  font-size: 15px;
+  color: black;
+}
+
+
+/* estilos de tabla DSR */
+
+.table-container {
+    width: 100%;
+    height: 100%;
+    /* overflow: auto;
+    white-space: nowrap */
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888888;
+}
+
+/* estilos de navBar */
+.boton-search {
+    background-color: #00A1E0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 31px;
+}
+
+.containe-fixed-nav {
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  z-index: 100;
+  background-color: /* #433F3F */ /* #CACFD2 */#B0C4DF;
+  /* background: linear-gradient(#00A1E0, #B0C4DF); */
+  overflow: auto;
+}
+
+.containe-fixed-nav Button{ 
+  white-space: nowrap;
+  font-size: 10px;
+  border-radius: 25px;
+}
+
+@media (max-width: 1200px) {
+    .containe-fixed-nav Button {
+      font-size: 7px;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .containe-fixed-nav Button {
+      font-size: 5px;
+    }
+  }  
+
+/* .containe-tabs-button {
+  white-space: nowrap;
+  font-size: 5px;
+} */
+
+.botones-magento-active {
+    background-color: #E5F0FB; 
+    border-radius: 20px 20px 0px 0px;
+    color: #0166C6;
+}
+
+.botones-magento {
+    background-color: #0166C6; 
+    border-radius: 10px 80px 20px 0px;
+}
+
+.botones-magento h6 {
+    color: rgb(223, 217, 217); 
+}
+
+.botones-magento:hover {
+    background-color: #E5F0FB; 
+    border-radius: 10px 80px 5px 0px;
+    cursor: pointer;
+}
+
+.botones-magento:hover h6 {
+    color: white;
+}
+
+.botones-magento:active {
+    background-color: #776868; 
+    border-radius: 20px 20px 0px 0px;
+}
+
+/* estilos imagenes */
+.ContainerImage{
+    position: relative;
+    width: 100%;
+    height: 200px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.ContainerImage:hover .textIcon{
+    visibility: visible;
+}
+
+.ContainerImage:hover img{
+    transform: scale(1.1);
+}
+
+.image{
+    width: 100%;
+    height: 100%;
+  }
+
+.image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.textIcon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black ;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    visibility: hidden;
+    transition: .1s ease;
+}
+
+/* estilos imagenes Issues photos */
+.ContainerImagePhotos{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.ContainerImagePhotos:hover .textIconPhotos{
+    visibility: visible;
+}
+
+.ContainerImagePhotos:hover img{
+    transform: scale(1.1);
+}
+
+.imagePhotos{
+    width: 100%;
+    height: 100%;
+  }
+
+.imagePhotos img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.textIconPhotos{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black ;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    visibility: hidden;
+    transition: .1s ease;
+}
+
+/* estilos imagenes Issues photos Delete*/
+.ContainerImageDelete{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.ContainerImageDelete:hover .textIconDelete{
+    visibility: visible;
+    border-radius: 5px;
+}
+
+.ContainerImageDelete:hover img{
+    transform: scale(1.1);
+    border-radius: 5px;
+}
+
+.imageDelete{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+
+.imageDelete img{
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  transition: .5s ease;
+  border-radius: 5px;
+}
+
+.textIconDelete{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black ;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    visibility: hidden;
+    transition: .1s ease;
+    border-radius: 5px;
+}
+
+/* estilos imagenes Csr */
+.ContainerImageCsr{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.ContainerImageCsr:hover .textIconCsr{
+    visibility: visible;
+}
+
+.ContainerImageCsr:hover img{
+    transform: scale(1.1);
+}
+
+.imageCsr{
+    width: 100%;
+    height: 100%;
+    margin-bottom: -5px;
+  }
+
+.imageCsr img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.textIconCsr{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black ;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    visibility: hidden;
+    transition: .1s ease;
+}
+
+/* estilos imagenes DHL*/
+.ContainerImageDhl{
+    border-radius: 2%;
+    position: relative;
+    width: 450px;
+    height: 250px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);
+}
+
+.ContainerImageDhl:hover{
+    border-radius: 2%;
+    position: relative;
+    width: 450px;
+    height: 250px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.ContainerImageDhlAtive{
+    border-radius: 2%;
+    position: relative;
+    width: 450px;
+    height: 250px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.ContainerImageDhl:hover .text{
+    border-radius: 2%;
+    /* visibility: visible; */
+    border-radius: 2%;
+    font-size: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black ;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    flex-direction: column;
+    /* gap: 20px; */
+    color: whitesmoke;
+    /* visibility: hidden; */
+    transition: .1s ease;
+}
+
+.ContainerImageDhlAtive .text{
+    border-radius: 2%;
+    /* visibility: visible; */
+    border-radius: 2%;
+    font-size: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black ;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    flex-direction: column;
+    /* gap: 20px; */
+    color: whitesmoke;
+    /* visibility: hidden; */
+    transition: .1s ease;
+}
+
+.ContainerImageDhl:hover img{
+    border-radius: 2%;
+    transform: scale(1.1);
+}
+
+.imageDhl{
+    width: 100%;
+    height: 100%;
+  }
+
+.imageDhl img{
+  border-radius: 2%;  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.text{
+    border-radius: 2%;
+    font-size: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* background: white ;
+    opacity: .5; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    flex-direction: column;
+    /* gap: 20px; */
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    /* visibility: hidden; */
+    transition: .1s ease;
+}
+
+.textDos{
+    border-radius: 2%;
+    font-size: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* background: white ;
+    opacity: .5; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    flex-direction: column;
+    /* gap: 20px; */
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    /* visibility: hidden; */
+    transition: .1s ease;
+}
+
+.text p{
+    margin: 25px 0 0 15px;
+}
+
+.text label{
+    margin: 15px 0 0 70%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.textDos p{
+  margin: 15px 0 0 15px;
+}
+
+.textDos label{
+    margin: 5px 0 0 70%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.estimated{
+    padding: 5px 0 0 15px;
+    width: 100%;
+    background-color: red;
+}
+
+/* cambiar eilos de boton con icono en bottonOrder */
+
+.boton-icon {
+  background-color: #00A1E0;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.boton-icon:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
