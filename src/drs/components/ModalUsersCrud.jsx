@@ -238,7 +238,7 @@ export const ModalUsersCrud = ({fetchDataUser, setAlertsOptions, setOpenAlerts, 
               {newM &&
                 <div style={{ width: '100%', padding: '0 20% 0 20%' }}>
                   <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '14px' }}>
-                    Users Data
+                    
                   </Typography>
                   <TextField
                     id="standard-select-currency"
@@ -254,7 +254,7 @@ export const ModalUsersCrud = ({fetchDataUser, setAlertsOptions, setOpenAlerts, 
                   >
                     {dataUserInformation.map((option) => (
                         <MenuItem key={option.user__email} value={option.user__user}>
-                        {option.user__name}
+                         {`${option.user__name} ${option.user__fullname}`}
                         </MenuItem>
                     ))}
                   </TextField>

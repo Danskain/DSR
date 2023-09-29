@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 import { TextareaAutosize } from '@mui/base'
 
-export const OrderInfomationComment = ({ selectCommentTemplateDocket, inputRefComment }) => {
+export const OrderInfomationComment = ({ selectCommentTemplateDocket, setSelectCommentTemplateDocket }) => {
   return (
     <Stack
       direction='column'
@@ -10,15 +10,20 @@ export const OrderInfomationComment = ({ selectCommentTemplateDocket, inputRefCo
       spacing={0}
       style={{ padding: '10px'}}
     >
-      <Typography variant='h6' style={{ fontSize: '16px' }}>
+      <Typography variant='h6' className='texto-con-relieve'>
         Comment
       </Typography>  
       <TextareaAutosize
         aria-label='minimum height'
         minRows={4}
-        defaultValue={selectCommentTemplateDocket.comment}
+        value={selectCommentTemplateDocket.comment}
+        onChange={(e) => setSelectCommentTemplateDocket({
+            commentTemplate: [],
+            comment: e.target.value,
+            docketHeader: []  
+        })}
         style={{ width: '100%', height: '90px', borderRadius: '5px' }}
-        ref={inputRefComment}
+        //ref={inputRefComment}
       />
     </Stack>
   )

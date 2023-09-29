@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Typography, Box } from '@mui/material'
 
 export const DsrCustonStyleValueDataGrid = ({ params, magento }) => {
-  const [styleColor] = useState(true)
+  //const [styleColor] = useState(true)
   const [valor, setValor] = useState('')
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const DsrCustonStyleValueDataGrid = ({ params, magento }) => {
           width: '1100px',  
         }}
       >
-        <Typography align='center' style={{ color: styleColor ? 'black' : 'white', cursor: 'pointer', fontSize: '12px' }}>
+        <Typography align='center' variant='h6' style={{ cursor: 'pointer', fontSize: '12px' }} className='texto-con-relieve'>
           {valor}
         </Typography>
         {magento &&

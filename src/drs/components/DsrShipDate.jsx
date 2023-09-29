@@ -17,7 +17,7 @@ export const DsrShipDate = ({params, name}) => {
   const [age, setAge] = useState(params.value)
   const [valor, setValor] = useState('')
   const [valueEstado, setValueEstado] = useState(true)
-  const [styleColor] = useState(true)
+  //const [styleColor] = useState(true)
   const [messageError, setMessageError] = useState(null)
   const [progress, setProgress] = useState(true)
   const { token } = useContext(AuthContext)
@@ -215,7 +215,7 @@ export const DsrShipDate = ({params, name}) => {
             >
               {
                 progress ?
-                  <Typography align='center' style={{ color: styleColor ? 'black' : 'white', cursor: 'pointer', fontSize: '16px' }}>
+                  <Typography align='center'variant='h6' style={{ cursor: 'pointer', fontSize: '16px' }} className='texto-con-relieve'>
                     {valor}
                   </Typography>
                 :

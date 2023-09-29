@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { AuthContext } from '../../../auth/context/AuthContext'
 import { Box, Typography, Stack, Button, Modal, Checkbox } from '@mui/material'
 import { SelectInput, UploadButton } from '../../components'
@@ -29,6 +29,7 @@ const style = {
     const [valueMeasure, setValueMeasure] = useState('')
     const [valuePrintType, setValuePrintType] = useState('')
     const [valueDate, setValueDate] = useState('')
+    const [valueChecked, setValueChecked] = useState(false)
     const [open, setOpen] = useState(false);
     const [idTransactionies, setIdTransactionies] = useState('')
     const [selectedFile, setSelectedFile] = useState([])
@@ -51,7 +52,7 @@ const style = {
     }, [idTransactionies, valueMeasure, valuePrintType, valueDate ])
     
 
-    const inputRefScodix = useRef()
+    //const inputRefScodix = useRef()
 
     const { token, user } = useContext(AuthContext)
 
@@ -192,6 +193,10 @@ const style = {
           .catch(error => console.log(error))
       }
 
+    const handleChange = (e) => {
+      setValueChecked(e.target.checked)
+    }  
+
     const handelSaveModal = () => {
 
         /* if (idTransactionies === '' || valueMeasure === '' || valuePrintType === '' ||  valueDate === ''  ) {
@@ -231,11 +236,12 @@ const style = {
                 printType: valuePrintType,
                 dateEvent: valueDate,
                 idTransaction: idTransactionies,
-                scodix: inputRefScodix.current.value
+                scodix: valueChecked ? 'true' : 'false'
               }, 
             }
           ]
-    
+        /* console.log(arrayData, 'arrayData')
+        return */
         const requestMagento = {
           status: valueSelect,
           typeOption: 'save',
@@ -277,7 +283,7 @@ const style = {
                     <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
                       Scodix
                     </Typography>
-                    <Checkbox {...label} inputRef={inputRefScodix} />
+                    <Checkbox {...label} checked={valueChecked} onChange={handleChange} />
                     <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
                       Date
                     </Typography>

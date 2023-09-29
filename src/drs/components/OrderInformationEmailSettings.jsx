@@ -42,6 +42,7 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
     if (orderWebsite) {
       setUserEmail(orderWebsite.userEmail)
       setEmailCC(orderWebsite.websiteCC)
+      inputRefNote.current.value = ''
     }
   }, [orderWebsite]);
 
@@ -480,7 +481,7 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
     {hidemEmail
     ?
       <Box style={{ backgroundColor: 'white', borderRadius: '10px', borderStyle: 'outset' }}>
-        <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '15px' }}>
+        <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '18px' }}>
           Email Settings
         </Typography>
         <Box style={{ padding: '20px 20px 0 20px' }}>
@@ -490,15 +491,15 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
             alignItems='flex-start'
             spacing={0.5}
           >
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '12px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               Email Template
             </Typography>
             <SelectInput age={templateValor} handleChange={handleChangeTemplate} valorData={templateArray} />
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '12px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               CSR
             </Typography>
             <SelectInput age={csrResultArrayValue} handleChange={handleChangeCsrResul} valorData={csrResultArray} />
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '12px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               customer email
             </Typography>
             <TextField fullWidth  variant="standard" name='userEmail' type='email' value={userEmail} onChange={chanceUseremail} />
@@ -516,7 +517,7 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
               spacing={0.5}
               style={{ width: '100%' }}
             >
-              <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '12px' }}>
+              <Typography variant='string' className='texto-con-relieve'>
                 NOTE
               </Typography>
               <TextareaAutosize
@@ -533,7 +534,7 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
               spacing={0.5}
               style={{ width: '100%' }}
             >
-              <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '12px' }}>
+              <Typography variant='string' className='texto-con-relieve'>
                 CC
               </Typography>
               <TextareaAutosize
@@ -553,7 +554,7 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
               spacing={0.5}
               style={{ width: '100%' }}
             >
-              <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '12px' }}>
+              <Typography variant='string' className='texto-con-relieve'>
                 BCC
               </Typography>
               <TextareaAutosize
@@ -571,7 +572,7 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
               spacing={0.5}
               style={{ width: '100%' }}
             >
-              <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '12px' }}>
+              <Typography variant='string' className='texto-con-relieve'>
                 Campaign
               </Typography>
               <TextareaAutosize
@@ -584,7 +585,7 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
             </Stack>
           </Stack>
         </Box>
-        <Typography variant='h6' style={{ marginTop: '10px', paddingLeft: '20px', fontSize: '15px' }}>
+        <Typography variant='h6' style={{ marginTop: '10px', paddingLeft: '13px', }} className='texto-con-relieve' >
           Log Email Sended
         </Typography>
         {/* <Box sx={{ height: '400px' }}>
@@ -666,31 +667,31 @@ export const OrderInformationEmailSettings = ({templateArray, csrResultArray, se
             alignItems='flex-start'
             spacing={0.5}
           > 
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
-              Name Template
+            <Typography variant='string' className='texto-con-relieve'>
+              Name Templates
             </Typography>
             <TextField fullWidth id="stan" variant="standard" inputRef={inputRefNameTemplate} name='inputRefNameTemplate' defaultValue={alterTemplateData.NameTemplate} />
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               Subject
             </Typography>
             <TextField fullWidth id="standard-basic" variant="standard" inputRef={inputRefSubject} name='inputRefSubject' defaultValue={alterTemplateData.Subject}/>
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               Sender Email
             </Typography>
             <TextField fullWidth id="standard-basic" variant="standard" inputRef={inputRefSenderEmail} name='inputRefSenderEmail' defaultValue={alterTemplateData.SenderEmail}/>
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               Password Email
             </Typography>
             <TextField fullWidth id="standard-basic" variant="standard" inputRef={inputRefPasswordEmail} name='inputRefPasswordEmail' defaultValue={alterTemplateData.PasswordEmail}/>
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               CC
             </Typography>
             <TextField fullWidth id="standard-basic" variant="standard" inputRef={inputRefCC} name='inputRefCC' defaultValue={alterTemplateData.CC}/>
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               BCC
             </Typography>
             <TextField fullWidth id="standard-basic" variant="standard" inputRef={inputRefBCC} name='inputRefBCC' defaultValue={alterTemplateData.BCC}/>
-            <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+            <Typography variant='string' className='texto-con-relieve'>
               Campaign
             </Typography>
             <TextField fullWidth id="standard-basic" variant="standard" inputRef={inputRefCampaign} name='inputRefCampaign' defaultValue={alterTemplateData.Campaign}/>

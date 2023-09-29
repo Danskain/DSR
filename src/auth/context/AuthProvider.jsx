@@ -28,10 +28,10 @@ const init = () => {
 export const AuthProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(authReducer, {}, init)
 
-  const logins = (name = '', navBar, tabes, token, dataMenuUser) => {
+  const logins = (userU, navBar, tabes, token, dataMenuUser) => {
     const pages = navBar
     const tabs = tabes
-    const user = { id: 'ABC', name }
+    const user = { idProfile: userU.user__profile_id, name: userU.user__name }
     const menuUser = dataMenuUser
     const action = { type: types.login, payload: user, pages, tabs, token, menuUser }
 
@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
     window.localStorage.removeItem('tabs')
     window.localStorage.removeItem('token')
     window.localStorage.removeItem('menuUser')
+    window.localStorage.removeItem('packing')
     const action = { type: types.logout }
     dispatch(action)
   }

@@ -164,7 +164,7 @@ export const ModalPortially = ({
         if (type === 'error') {
           setAlertsOptions({
             types: type,
-            message: 'I do not save'
+            message
           })
           setOpenAlerts(true)
           setLoadingSave(false)

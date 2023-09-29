@@ -106,7 +106,7 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
           >
             <Item>
               <Box style={{ backgroundColor: 'white', borderRadius: '10px', borderStyle: 'outset' }}>
-                <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '17px' }}>
+                <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '18px' }}>
                   Change Customer Password
                 </Typography>
                 <Box style={{ padding: '20px 20px 0 20px' }}>
@@ -116,11 +116,11 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
                     alignItems='flex-start'
                     spacing={0.5}
                   >
-                    <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+                    <Typography variant='h6' className='texto-con-relieve'>
                       Sites
                     </Typography>
                     <SelectInput age={setesArrayValue} handleChange={handleChangeSites} valorData={setesArrayResult} />
-                    <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+                    <Typography variant='h6' className='texto-con-relieve'>
                       Email
                     </Typography>
                     <TextField fullWidth id="standard-basic" variant="standard" inputRef={inputRef} name='Change' />
@@ -160,7 +160,7 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
           >
             <Item>
               <Box style={{ backgroundColor: 'white', borderRadius: '10px', borderStyle: 'outset', height: '260px' }}>
-                  <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 8px 0 0', color: 'white', fontSize: '17px' }}>
+                  <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 8px 0 0', color: 'white', fontSize: '18px' }}>
                     Shipping Information
                   </Typography>
                   
@@ -172,24 +172,24 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
                       style={{ margin: '20px' }}
                     >
                       
-                        <Typography variant='h6' style={{ fontSize: '17px' }}>
+                        <Typography variant='h6' className='texto-con-relieve'>
                           {info.firstname} {info.lastname}
                         </Typography>
                       
                       
-                        <Typography variant='h6' style={{ fontSize: '17px' }}>
+                        <Typography variant='h6' className='texto-con-relieve'>
                           {info.company}
                         </Typography>
                       
-                        <Typography variant='h6' style={{ fontSize: '17px' }}>
+                        <Typography variant='h6' className='texto-con-relieve'>
                           {info.street}
                         </Typography>
                       
-                        <Typography variant='h6' style={{ fontSize: '17px' }}>
+                        <Typography variant='h6' className='texto-con-relieve'>
                           {info.city}, {info.region}, {info.postcode}
                         </Typography>
                       
-                        <Typography variant='h6' style={{ fontSize: '17px' }}>
+                        <Typography variant='h6' className='texto-con-relieve'>
                           {info.telephone}
                         </Typography>
                       
@@ -221,7 +221,7 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
                 >
                   <Item2>
                     <Box style={{ backgroundColor: 'white', borderRadius: '10px', borderStyle: 'outset' }}>
-                      <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '17px' }}>
+                      <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '18px' }}>
                         Account Information
                       </Typography>
                       <Box style={{ padding: '20px 20px 20px 20px' }}>
@@ -231,16 +231,16 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
                           alignItems='flex-start'
                           spacing={0.5}
                         >
-                          <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+                          <Typography variant='h6' className='texto-con-relieve'>
                           Customer Name:
                           </Typography>
-                          <Typography variant='string' style={{ fontSize: '15px' }}>
+                          <Typography variant='string' className='texto-con-relieve-value'>
                             {infoBillingResult.firstname} {infoBillingResult.lastname}
                           </Typography>
-                          <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+                          <Typography variant='h6' className='texto-con-relieve'>
                             Email:
                           </Typography>
-                          <Typography variant='string' style={{ fontSize: '15px' }}>
+                          <Typography variant='string' className='texto-con-relieve-value'>
                             {infoBillingResult.email}
                           </Typography>
                         </Stack>
@@ -255,7 +255,7 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
         <Grid item xs={4} sm={8} md={6}>
           <Item>
             <Box style={{ backgroundColor: 'white', borderRadius: '10px', borderStyle: 'outset', height: '260px' }}>
-              <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '17px' }}>
+              <Typography variant='h6' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', fontSize: '18px' }}>
                 Billing Information
               </Typography>
               <Stack
@@ -266,24 +266,24 @@ export const MagentoOrderInformationSales = ({setesArrayResult, infoBillingResul
                 style={{ margin: '20px' }}
               >
                 
-                  <Typography variant='h6' style={{ fontSize: '17px' }}>
+                  <Typography variant='h6' className='texto-con-relieve'>
                     {infos.firstname} {info.lastname}
                   </Typography>
                 
                 
-                  <Typography variant='h6' style={{ fontSize: '17px' }}>
+                  <Typography variant='h6' className='texto-con-relieve'>
                     {infos.company}
                   </Typography>
                 
-                  <Typography variant='h6' style={{ fontSize: '17px' }}>
+                  <Typography variant='h6' className='texto-con-relieve'>
                     {infos.street}
                   </Typography>
                 
-                  <Typography variant='h6' style={{ fontSize: '17px' }}>
+                  <Typography variant='h6' className='texto-con-relieve'>
                     {infos.city}, {infos.region}, {infos.postcode}
                   </Typography>
                 
-                  <Typography variant='h6' style={{ fontSize: '17px' }}>
+                  <Typography variant='h6' className='texto-con-relieve'>
                     {infos.telephone}
                   </Typography>
               </Stack>

@@ -15,10 +15,10 @@ export const OrderInformationHistorialPayment = ({
           <Box
             key={index}
           > 
-            <Typography variant='subtitle1' align='left' style={{ fontSize: '11px' }}>
+            <Typography variant='subtitle1' align='left' className='texto-con-relieve'>
               {history.created_at}
             </Typography>
-            <Typography variant='subtitle1' align='left' style={{ fontSize: '11px' }}>
+            <Typography variant='subtitle1' align='left' className='texto-con-relieve-value'>
               {renderHTML(history.comment)}
             </Typography>   
             <br />

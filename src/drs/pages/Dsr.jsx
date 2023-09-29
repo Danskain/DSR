@@ -54,7 +54,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export const Dsr = ({setOpenAlerts, setAlertsOptions }) => {
-  const { tabs, token } = useContext(AuthContext)
+  const { tabs, token, logout } = useContext(AuthContext)
   const [datasTabs, setDatasTabs] = useState(tabs)
   const [datasMapping, setDataMapping] = useState([])
   const [dataInputSelect, setDataInputSelect] = useState([])
@@ -70,6 +70,10 @@ export const Dsr = ({setOpenAlerts, setAlertsOptions }) => {
   const [toolTipTotalsOrdersPacking, setToolTipTotalsOrdersPacking] = useState([])
   const [toolTipTotalsOrdersCsr, setToolTipTotalsOrdersCsr] = useState([])
 
+  const [columnVisibilityModel, setColumnVisibilityModel] = useState({
+    id: false,
+  });
+  
   const inputRefDescription = useRef()
   const inputRefSolutions = useRef()
   /*/const [valorDataSelectIssues, setValorDataSelectIssues] = useState([])
@@ -174,12 +178,12 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     display: 'none'
   },
   '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
-    borderRight: `2px solid ${
+    borderRight: `4px solid ${
       theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
     }`
   },
   '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-    borderBottom: `2px solid ${
+    borderBottom: `4px solid ${
       theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
     }`
   },
@@ -218,13 +222,14 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'id',
       headerName: 'ID',
-      width: 90, 
+      //width: 90, 
       align: 'center',
     },
     {
       field: 'dsr_order',
       headerName: 'ORDER',
-      width: 130,
+      minWidth: 130,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <BottonOrder params={params} idwebsite={params.row.dsr_websiteId} modulo={'1'} magento={true}/>
@@ -232,7 +237,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_status',
       headerName: 'STATUS',
-      width: 110,
+      minWidth: 110,
+      flex: 1,
       //editable: true,
       align: 'center',
       headerClassName: 'super-app-theme--header',
@@ -241,7 +247,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_company',
       headerName: 'COMPANY',
-      width: 114,
+      minWidth: 114,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -249,7 +256,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_city',
       headerName: 'CITY',
-      width: 100,
+      minWidth: 100,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -257,7 +265,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_shipping',
       headerName: 'SHIP METHOD',
-      width: 100,
+      minWidth: 100,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -265,7 +274,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_csr',
       headerName: 'CSR',
-      width: 100,
+      minWidth: 100,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -273,7 +283,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_est_shipping_date',
       headerName: 'SHIP DATE',
-      width: 222,
+      minWidth: 225,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrShipDate params={params} name='saveShippingDate' setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />
@@ -281,7 +292,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_est_delivery_date',
       headerName: 'DEL DATE',
-      width: 222,
+      minWidth: 225,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrShipDate params={params} name='saveDeliveryDate' setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />
@@ -289,7 +301,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_time',
       headerName: 'SAMPLE',
-      width: 80,
+      minWidth: 80,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -297,7 +310,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_csr_comment',
       headerName: 'URGENCY',
-      width: 110,
+      minWidth: 110,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} magento={true} />
@@ -305,7 +319,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_sc',
       headerName: 'SC',
-      width: 60,
+      minWidth: 60,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -313,7 +328,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_dieused',
       headerName: 'CUSTOM DIE',
-      width: 100,
+      minWidth: 100,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -321,7 +337,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_delivery',
       headerName: 'DELIVERY',
-      width: 140,
+      minWidth: 140,
+      flex: 1,
       align: 'center',
       //cellClassName: 'super-app-theme--cell',
       headerClassName: 'super-app-theme--header',
@@ -330,22 +347,24 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'dsr_packing',
       headerName: 'PACKING',
-      width: 140,
+      minWidth: 140,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
-      renderCell: (params) => <InputSelectDataTable dataInputSelect={dataInputSelect} params={params} flag='packing' idButtonData={idButtonData} setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />
+      renderCell: (params) => <InputSelectDataTable datasMapping={datasMapping} dataInputSelect={dataInputSelect} params={params} flag='packing' idButtonData={idButtonData} setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />
     },
     {
       field: 'dsr_image',
       headerName: 'IMAGE',
-      width: 220,
+      minWidth: 220,
+      flex: 1,
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <Image dataMapping={dataMapping} params={params} setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} idButtonData={idButtonData} />
     },
     {
       field: 'dsr_product_options',
       headerName: 'PRODUCT INFO',
-      width: 350,
+      minWidth: 350,
       align: 'left',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <ProductInfo params={params} />
@@ -492,13 +511,14 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'id',
       headerName: 'ID',
-      width: 90, 
+      //width: 90, 
       align: 'center',
     },
     {
       field: 'issues__mg_order',
       headerName: 'ORDER',
-      width: 130,
+      minWidth: 130,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <BottonOrder params={params} idwebsite={params.row.dsr_websiteId} modulo={'1'} />
@@ -506,7 +526,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__status_issues',
       headerName: 'STATUS',
-      width: 70,
+      minWidth: 70,
+      flex: 1,
       //editable: true,
       align: 'center',
       headerClassName: 'super-app-theme--header',
@@ -515,7 +536,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__date_issue',
       headerName: 'ISSUES DATE',
-      width: 210,
+      minWidth: 210,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrDataBasic handleChange={handleValueDate} params={params} />
@@ -523,7 +545,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__resolv_issue',
       headerName: 'SOLUTION DATE',
-      width: 210,
+      minWidth: 210,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrDataBasic handleChange={handleValueDate} params={params} />
@@ -531,7 +554,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__csr',
       headerName: 'CSR',
-      width: 110,
+      minWidth: 110,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -539,7 +563,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__state_issues',
       headerName: 'ISSUE STATUS',
-      width: 200,
+      minWidth: 200,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrInputSelectIssues handleChange={handleValueDateSelectIssues} params={params} />
@@ -547,7 +572,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__amount',
       headerName: 'AMOUNT',
-      width: 110,
+      minWidth: 110,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrCustonStyleValueDataGrid params={params} />
@@ -555,7 +581,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__description',
       headerName: 'DESCRIPTION',
-      width: 250,
+      minWidth: 250,
+      flex: 1,
       align: 'center',
       editable: true,
       //cellClassName: 'super-app-theme--cell',
@@ -573,7 +600,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__solutions',
       headerName: 'SOLUTIONS',
-      width: 200,
+      minWidth: 200,
+      flex: 1,
       align: 'center',
       editable: true,
       headerClassName: 'super-app-theme--header',
@@ -583,7 +611,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__imageOrder',
       headerName: 'PHOTOS',
-      width: 220,
+      minWidth: 220,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrImageIssues saveImageData={saveImageData} params={params} setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} idButtonData={idButtonData} /* idTransactionies={idTransactionies} setIdTransactionies={setIdTransactionies} */ />
@@ -592,7 +621,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     {
       field: 'issues__images',
       headerName: 'PHOTOS DELETE',
-      width: 250,
+      minWidth: 250,
+      flex: 1,
       align: 'center',
       headerClassName: 'super-app-theme--header',
       renderCell: (params) => <DsrImagesIssuesDelete deleteImageIssues={deleteImageIssues} params={params} setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} idButtonData={idButtonData} />
@@ -668,7 +698,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     return COLORS_CELL[params.row.dsr_status] || COLORS_CELL_DEFAULT
   } */
 
-  const fetchData = async (ref, name) => {
+  const fetchData = async (ref) => {
     const request = {
       fieldSql: ref,
       token
@@ -694,28 +724,45 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
           setColumsData(columns)
           if (!Array.isArray(totalStatus)) {
             const arregloDeObjeto = Object.values(totalStatus.totalStatus)
-            setToolTipTotalsOrders(arregloDeObjeto)
+            if (arregloDeObjeto[0].countStatus !== 0) {
+              setToolTipTotalsOrders(arregloDeObjeto)
+            }else{
+              setToolTipTotalsOrders([])
+            }
           }else{
             setToolTipTotalsOrders([])
           }
 
-          if (!Array.isArray(totalCsr) && name === 'Without date') {
+          if (!Array.isArray(totalCsr)/*  && name === 'Without date' */) {
             const arregloDeObjeto = Object.values(totalCsr.totalCsr)
-            setToolTipTotalsOrdersCsr(arregloDeObjeto)
+            if (arregloDeObjeto[0].countCsr !== 0) {
+              setToolTipTotalsOrdersCsr(arregloDeObjeto)
+            }else{
+              setToolTipTotalsOrdersCsr([])
+            }
           }else{
             setToolTipTotalsOrdersCsr([])
           }
 
           if (!Array.isArray(totalPacking)) {
             const arregloDeObjeto = Object.values(totalPacking.totalPacking)
-            setToolTipTotalsOrdersPacking(arregloDeObjeto)
+            //console.log("arregloDeObjeto:", arregloDeObjeto)
+            if (arregloDeObjeto[0].countPacking !== 0) {
+              setToolTipTotalsOrdersPacking(arregloDeObjeto)
+            }else{
+              setToolTipTotalsOrdersPacking([])
+            }
           }else{
             setToolTipTotalsOrdersPacking([])
           }
           
           if (!Array.isArray(totalUrgency)) {
             const arregloDeObjeto = Object.values(totalUrgency.totalUrgency)
-            setToolTipTotalsOrdersUrgency(arregloDeObjeto)
+            if (arregloDeObjeto[0].countUrgency !== 0) {
+              setToolTipTotalsOrdersUrgency(arregloDeObjeto)
+            }else{
+              setToolTipTotalsOrdersUrgency([])
+            }
           }else{
             setToolTipTotalsOrdersUrgency([])
           }
@@ -745,7 +792,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
       })
       .finally(() => {
         handleClose()
-      });
+      })
   }
 
   useEffect(() => {
@@ -884,6 +931,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   }
 
   const reference = (ref, id, name) => {
+    localStorage.removeItem('packing')
     changeColor(id)
     setNameTab(name)
     if(name === 'Issues'){
@@ -1147,7 +1195,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
                                 >
                                   {da.countCsrName.csr === '' ? 
                                     <Typography variant='string' style={{ fontSize: '0.8rem', color: 'black'}}>
-                                       
+                                      Undefined
                                     </Typography>
                                   :
                                     <Typography variant='string' style={{ fontSize: '0.8rem', color: 'black'}}>
@@ -1182,6 +1230,10 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
       </GridToolbarContainer>
     );
   }
+
+  /* const columnVisibilityModelRE = {
+    id: false
+  } */
 
   return (
     <>
@@ -1250,17 +1302,24 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
             toolbar: CustomToolbar,
           }}
           initialState={{
-            columns: {
-              columnVisibilityModel: {
+            /* columns: {
+              columnVisibilityModel:  {
                 id: false,
               },
-            },
+              //columnVisibilityModel: columnVisibilityModelRE,
+            }, */
             pagination: {
               paginationModel: {
                 pageSize: 25
               }
             }
           }}
+
+          columnVisibilityModel={columnVisibilityModel}
+          onColumnVisibilityModelChange={(newModel) => {
+            setColumnVisibilityModel(newModel)
+          }
+          }
           /* slotProps={{
             toolbar: {
               disableexport: true, // Desactivar el botón de exportación

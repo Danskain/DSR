@@ -28,14 +28,14 @@ export const OrderInformationAddress = ({
           spacing={1}
           /* sx={{ display: { lg: 'flex', md: 'none' } }} */
         >
-          <Typography variant='h6' style={{ fontSize: '16px' }}>
+          <Typography variant='h6' className='texto-con-relieve'>
             {da.label}
           </Typography>
           {da.typeCtrl === 'butoon'
           ? <IconButton sx={{ color: 'red' }} aria-label='upload picture' component='label' onClick={() => haidenSelectEventAddress(da.id)}><EditIcon style={{ fontSize: '13px' }}/></IconButton>
           : ''}
           {da.event
-            ? <Typography variant='subtitle1' style={{ fontSize: '15px' }}> {da.value} </Typography>
+            ? <Typography variant='subtitle1' className='texto-con-relieve-value'> {da.value} </Typography>
             : <InputLabel age={da.value} handleChange={handleChangeAddress} id={da.id} />}
         </Stack>
       ))}

@@ -442,7 +442,7 @@ export const TemplateEmail = ({setAlertsOptions, setOpenAlerts}) => {
   
   return (
     <Box
-      style={{ marginTop: '30px'}}
+      style={{ margin: '35px 34% 0 34%', backgroundColor: '#E3E4E5', padding: '20px 0 10px 0', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'}}
     >
       <Stack
         direction="column"

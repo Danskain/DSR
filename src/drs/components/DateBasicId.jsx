@@ -33,7 +33,7 @@ export const DateBasicId = ({ age, handleChange, id }) => {
             value={dayjs(age) || null}
             slotProps={{
               actionBar: {
-                actions: ['clear'],
+                actions: ['clear', 'today'],
               },
             }}
             emptyLabel=" "

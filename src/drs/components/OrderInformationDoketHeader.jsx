@@ -42,7 +42,7 @@ export const OrderInformationDoketHeader = ({ valorDataSelectDocketHeader, setVa
           alignItems='center'
           pacing={1}
         >
-          <Typography  variant='h6' align='left' style={{ fontSize: '16px' }}>
+          <Typography  variant='h6' align='left' className='texto-con-relieve'>
             Docket Header
           </Typography>
             {hidemDocketHeader

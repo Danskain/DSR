@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef, useContext, } from 'react'
 import { AuthContext } from '../../auth/context/AuthContext'
 import { Box, Grid, Stack, styled, Paper } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -34,6 +34,7 @@ export const MagentoOrderInformationCrs = ({
   selectDocketHeader,
   setSelectDocketHeader,
   selectCommentTemplateDocket,
+  setSelectCommentTemplateDocket,
   templateArray,
   csrResultArray,
   orderWebsite,
@@ -60,7 +61,18 @@ export const MagentoOrderInformationCrs = ({
   const [alertsOptions, setAlertsOptions] = useState({})
   const [openAlerts, setOpenAlerts] = useState(false)
 
+  //const location = useLocation();
+
   const { token, user } = useContext(AuthContext)
+
+  /* useEffect(() => {
+    
+    console.log("selectCommentTemplateDocket.comment:", selectCommentTemplateDocket.comment)
+    //if (inputRefComment.current.value !== '') {
+      //inputRefComment.current.value = ''
+    
+    
+  }, [location]) */;
 
   
   const handleImageError = () => {
@@ -237,8 +249,48 @@ export const MagentoOrderInformationCrs = ({
     setArraySelectOrderInformation(arrayResult)
   }
 
+  const fechaActualCanada = (date) => {
+    // Crear un objeto de fecha
+    const fechaActual = new Date();
+
+    // Opciones de formato de fecha y hora
+    const opcionesFormato = {
+      timeZone: 'America/Toronto', // Zona horaria de Toronto
+      hour12: false, // Usar formato de 24 horas
+      hour: '2-digit',
+      minute: '2-digit',
+      //second: '2-digit'
+    };
+
+    // Formatear la fecha y hora actual según la zona horaria de Toronto
+    const horaToronto = fechaActual.toLocaleTimeString('en-US', opcionesFormato);
+
+    // Mostrar la hora en la consola
+    //console.log(`La hora actual en Toronto es: ${horaToronto}`);
+    return `${date}T${horaToronto}`
+  }
+
   const checkValueOrder = (id) => {
+    
     const arrayResultSprid = [...arraySelectOrderInformation]
+    
+    if (id === 6) {
+      const arrayResultSpridResuklt = arrayResultSprid.map((data, index) => {
+        if (index === 7) {
+          return {
+            ...data,
+            value: fechaActualCanada(arrayResultSprid[6].value)
+          }
+        }
+        return data
+      })
+      const avent = true
+      const arrayResult = arrayCommutationTrue(id, arrayResultSpridResuklt, avent)
+      //console.log("arrayResult:", arrayResult[7])
+      setSaveStatusCancelArraySelectOrderInformation(arrayResult)
+      setArraySelectOrderInformation(arrayResult)
+      return 
+    }
     const avent = true
     const arrayResult = arrayCommutationTrue(id, arrayResultSprid, avent)
     setSaveStatusCancelArraySelectOrderInformation(arrayResult)
@@ -315,7 +367,7 @@ export const MagentoOrderInformationCrs = ({
   }
 
   const handleChangeDie = (e, id) => {
-    const validate = /^[a-zA-Z0-9]+$/.test(e.target.value)
+    const validate = /^[a-zA-Z0-9\s]+$/.test(e.target.value)
     
     if (e.target.value.length > 0) {
       if (!validate && id === 0) {
@@ -338,8 +390,17 @@ export const MagentoOrderInformationCrs = ({
 
   const checkValueDie = (id) => {
     const arrayResultSprid = [...dieResultArray]
+    const arrayResultSpridResut = arrayResultSprid.map((data, index) => {
+      if (index === 0) {
+        return {
+          ...data,
+          value: data.value.replace(/\s/g, "")
+        }
+      }
+      return data
+    })
     const avent = true
-    const arrayResult = arrayCommutationTrue(id, arrayResultSprid, avent)
+    const arrayResult = arrayCommutationTrue(id, arrayResultSpridResut, avent)
     setDieResultArray(arrayResult)
   }
 
@@ -573,7 +634,7 @@ export const MagentoOrderInformationCrs = ({
       dieTrackingNumberCarrier: mapSaveMagento(dieTrackingNumberCarrierFormart(dieResultArrayResult)),
       commentTemplate: objCommentTemplate,
       docketHeader: objDocketHeader,
-      comment: inputRefComment.current.value,
+      comment: selectCommentTemplateDocket.comment,
       dsr__mg_order: orderWebsite.order,
       dsr__id_website: orderWebsite.website,
       user: user.name
@@ -625,7 +686,7 @@ export const MagentoOrderInformationCrs = ({
                   </Box>
                 </Grid>
                 <Grid item xs={4} sm={4} md={6} /* key={index} */>
-                  <Box sx={{  height: '380px', width: '100%' }}>
+                  <Box sx={{  height: '420px', width: '100%' }}>
                     <Stack
                       direction="column"
                       justifyContent="space-between"
@@ -649,7 +710,7 @@ export const MagentoOrderInformationCrs = ({
                   </Box>    
                 </Grid>
                 <Grid item xs={4} sm={4} md={6} /* key={index} */>
-                  <Box sx={{ height: '380px', width: '100%' }}>
+                  <Box sx={{ height: '420px', width: '100%' }}>
                     <Stack
                       direction="column"
                       justifyContent="space-between"
@@ -670,7 +731,7 @@ export const MagentoOrderInformationCrs = ({
                       <Box
                         sx={{ backgroundColor: 'white', borderStyle: 'outset', borderRadius: '10px 10px 10px 10px', width: '100%' }}
                       >
-                        <OrderInfomationComment selectCommentTemplateDocket={selectCommentTemplateDocket} inputRefComment={inputRefComment}/>
+                        <OrderInfomationComment selectCommentTemplateDocket={selectCommentTemplateDocket} setSelectCommentTemplateDocket={setSelectCommentTemplateDocket} />
                       </Box>
                     </Stack>  
                   </Box>
@@ -747,7 +808,7 @@ export const MagentoOrderInformationCrs = ({
                     spacing={0}
                   >
                     <Box
-                      sx={{ width: '50%', height: '50%', backgroundColor: 'white', borderStyle: 'double', borderRadius: '5px'}}
+                      sx={{ width: '70%', height: '70%', backgroundColor: 'white', borderStyle: 'double', borderRadius: '5px'}}
                     >
                         <Box
                           className='ContainerImageCsr'

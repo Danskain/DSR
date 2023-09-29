@@ -144,6 +144,10 @@ export const TableInventory = () => {
   const handleOpenModal = () => setOpenModal(true)
   const handleCloseModal = () => setOpenModal(false)
 
+
+
+  const handleManufacture = () => alert('Manufacture')
+
   /* const formartJson = (text) => {
     const arrayResilt = JSON.parse(text)
     const resultado = arrayResilt.map(objeto => {
@@ -273,6 +277,9 @@ export const TableInventory = () => {
         {/* <GridToolbarExport style={{color: 'white', backgroundColor: '#00A1E0'}} /> */}
         <Button color="primary" style={{color: 'white', backgroundColor: '#00A1E0', fontSize: '12px'}} startIcon={<AddIcon />} onClick={handleOpenModal}>
           Add 
+        </Button>
+        <Button color="primary" style={{color: 'white', backgroundColor: '#00A1E0', fontSize: '12px'}} startIcon={<AddIcon />} onClick={handleManufacture}>
+          Manufacturer
         </Button>
       </GridToolbarContainer>
     );

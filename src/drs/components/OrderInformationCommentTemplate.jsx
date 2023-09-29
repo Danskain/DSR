@@ -44,7 +44,7 @@ export const OrderInformationCommentTemplate = ({selectCommentTemplate, setSelec
           alignItems='center'
           spacing={1}
         >
-          <Typography variant='h6' align='left' style={{ fontSize: '16px' }}>
+          <Typography variant='h6' align='left' className='texto-con-relieve'>
             Comment Template
           </Typography>
           {hidemCommentTemplate

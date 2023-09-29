@@ -74,7 +74,7 @@ export const ReadyForShipping = ({setDataModalsPortially, dataModalsPortially, p
         fetch(apiRest, requestOptions)
           .then(response => response.json())
           .then(datas => {
-            const { type } = datas
+            const { type, message } = datas
             //setDataModalsPortially({type:"ok",idOption:"6",url:"https://dsrapi.1dayfolders.com/label_download/7.pdf"})
             if (type === 'ok') {
               setDataModalsPortially(datas)   
@@ -92,7 +92,7 @@ export const ReadyForShipping = ({setDataModalsPortially, dataModalsPortially, p
             if (type === 'error') {
               setAlertsOptions({
                 types: type,
-                message: 'I dont keep'
+                message
               })
               setOpenAlerts(true)
               setLoadingSave(false)

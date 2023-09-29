@@ -25,7 +25,7 @@ export const OrderInformationDie = ({
             alignItems='center'
             spacing={1}
           >
-            <Typography variant='h6' align='left' style={{ fontSize: '16px' }}>
+            <Typography variant='h6' align='left' className='texto-con-relieve'>
               {da.label}
             </Typography>
             {da.typeCtrl === 'input'
@@ -33,7 +33,7 @@ export const OrderInformationDie = ({
             : ''}
           </Stack>
           {da.event
-          ? <Typography variant='body1' align='left' style={{ fontSize: '15px', padding: 0 }}> {da.value} </Typography>
+          ? <Typography variant='body1' align='left' className='texto-con-relieve-value'> {da.value} </Typography>
           : <MagentoSelect age={da.value} typeCtrl={da.typeCtrl} handleChange={handleChangeDie} id={da.id} haidenCancel={haidenCancelDie} valorData={da.arraySelect} checkValue={checkValueDie} />}
         </Grid>
       ))}  

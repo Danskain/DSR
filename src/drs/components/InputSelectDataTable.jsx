@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import { AuthContext } from '../../auth/context/AuthContext'
 import { Stack, IconButton, Typography, Box } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check'
@@ -8,17 +8,21 @@ import { apiRest } from '../../logic/constantes'
 import { ModalDsr } from './modalDsrStatus'
 import Swal from 'sweetalert2'
 
-export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonData, setOpenAlerts, setAlertsOptions }) => {
+export const InputSelectDataTable = ({datasMapping, dataInputSelect, params, flag, idButtonData, setOpenAlerts, setAlertsOptions }) => {
   //console.log("datasMapping:", datasMapping)
   
   const [age, setAge] = useState(params.value)
   const [valueEstado, setValueEstado] = useState(true)
   const [valueEstatus, setValueEstatus] = useState([])
-  const [styleColor] = useState(true)
-  const [valor, setValor] = useState('')
+  //const [styleColor] = useState(true)
+  //const [valor, setValor] = useState('')
   const [optionsModalDsr, setOptionsModalDsr] = useState({})
   const [openModal, setOpenModal] = useState(false)
   const { token, user } = useContext(AuthContext)
+
+  const inputRefValue = useRef('')
+
+  //console.log("mapping:", datasMapping)
 
   const handleOpenModal = () => setOpenModal(true)
   /* const handleCloseModal = () => {
@@ -29,16 +33,37 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
     if (reason === 'backdropClick') return
     setOpenModal(false);
   }
+   
+  const controlarRender = (id) => {
+    const datasMappingResult =  [...datasMapping]
+    const filterDatasMappingResult = datasMappingResult.filter(data => data.id === id)
+    if (filterDatasMappingResult.length > 0) {
+      const valueExiste = JSON.parse(localStorage.getItem('packing'))
+      //console.log(valueExiste)
+      if (!valueExiste) {
+        inputRefValue.current = filterDatasMappingResult[0].dsr_packing
+      }else{
+        const filterDatasMappingResultFalse = valueExiste.filter(data => data.id === params.id)
 
+        if (filterDatasMappingResultFalse.length > 0) {
+          inputRefValue.current = filterDatasMappingResultFalse[0].value
+        }else{
+          inputRefValue.current = filterDatasMappingResult[0].dsr_packing
+        }
+      }
+    }
+  }
 
   useEffect(() => {
+    //console.log(valor)
     const { row } = params
 
     const { status, delivery, packing } = dataInputSelect
 
-    if (flag === 'status') {
-      if (valor === '') {
-        setValor(row.dsr_Name_status || row.issues__status_issues)
+    if (flag === 'status') {  
+      if (inputRefValue.current === '') {
+        //setValor(row.dsr_Name_status || row.issues__status_issues)
+        inputRefValue.current = row.dsr_Name_status || row.issues__status_issues
       }
       //setAge(row.dsr_Name_status || row.issues__status_issues)
       if (status) {
@@ -56,8 +81,9 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
     }
 
     if (flag === 'delivery') {
-      if (valor === '') {
-        setValor(row.dsr_delivery)
+      if (inputRefValue.current === '') {
+        //setValor(row.dsr_delivery)
+        inputRefValue.current = row.dsr_delivery
       }
       //setAge(row.dsr_delivery)
       if (delivery) {
@@ -75,11 +101,14 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
     }
 
     if (flag === 'packing') {
-      if (valor === '') {
-        setValor(row.dsr_packing)
+      if (inputRefValue.current === '') {
+        controlarRender(row.id)
+        //console.log("row:", row.id)
+              
+        //setValor(row.dsr_packing)
       }
       
-      if (packing) {
+      if (packing) { 
         const arrayResult = packing.map((e) => {
           return {
             id: e.packing__id,
@@ -93,12 +122,12 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
       }
     }
     //document.getElementById(`tab-2`).click()
-  }, [params])
+  }, [])
 
   const handleChangeValue = () => {
     setValueEstado(!valueEstado)
   }
-
+  
   const handleChange = (e) => {
     setAge(e.target.value)
     //setValor(e.target.value)
@@ -244,8 +273,23 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
         const { type, message } = datas
         if (type === 'ok') {
           //console.log("idButtonData:", idButtonData)
-          //resetDataTable()
-          setValor(age)
+          //resetDataTable() params.id
+          const objPacking = {
+            id: params.id,
+            value: age
+          }
+          const arregloPacking = [objPacking]
+
+          let recuperadoPacking = JSON.parse(localStorage.getItem('packing'))
+
+          if (!recuperadoPacking) {
+            localStorage.setItem('packing', JSON.stringify(arregloPacking))
+          }else{
+            recuperadoPacking.push(objPacking)
+            localStorage.setItem('packing', JSON.stringify(recuperadoPacking))
+          }
+          //setValor(age)
+          inputRefValue.current = age
           setValueEstado(true)
           /* setAlertsOptions({
             types: 'success',
@@ -284,7 +328,8 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
         if (type === 'ok') {
 
           //resetDataTable()
-          setValor(age)
+          //setValor(age)
+          inputRefValue.current = age
           setValueEstado(true)
           /* setAlertsOptions({
             types: 'success',
@@ -382,7 +427,6 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
         'In Press Hard Copy Proof': <img src='https://prestodemos.com/dsr/img/preview_icon.png' alt="" style={{ width: '60%', height:'100%', marginLeft: '18%' }} />,
         'In Press Press Sheet': <img src='https://prestodemos.com/dsr/img/preview_icon.png' alt="" style={{ width: '60%', height:'100%', marginLeft: '18%' }} />,
       }
-  
       const COLORS_CELL_DEFAULT = ''
       return objOrdanamiento[text] || COLORS_CELL_DEFAULT
   }
@@ -408,10 +452,12 @@ export const InputSelectDataTable = ({ dataInputSelect, params, flag, idButtonDa
             }}
           >
             {
-              hidenOptionsImagesDeliveryPacking(valor)
+              hidenOptionsImagesDeliveryPacking(inputRefValue.current)
             }
-            <Typography align='center' style={{ color: styleColor ? 'black' : 'white', cursor: 'pointer', fontSize: '12px' }}>
-              {valor}
+            <Typography align='center' variant='h6' style={{ cursor: 'pointer', fontSize: '12px' }} className='texto-con-relieve' >
+              {
+                 inputRefValue.current
+              }
             </Typography>
           </Box>
         </Box>

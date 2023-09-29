@@ -1,5 +1,6 @@
 //import React from 'react'
-import { Stack, Button } from '@mui/material'
+import { Button, Stack } from '@mui/material'
+import './botonDownload.css'
 
 export const Download = ({params}) => {
 
@@ -34,7 +35,7 @@ export const Download = ({params}) => {
       //document.body.appendChild(link);
       link.click();
       //document.body.removeChild(link); */
-    }  
+    }
   return (
     <Stack
       direction="column"

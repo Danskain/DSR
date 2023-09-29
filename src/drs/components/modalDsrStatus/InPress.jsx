@@ -11,6 +11,8 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
   const [valueApprovedBy, setValueApprovedBy] = useState('')
   const [loadingSave, setLoadingSave] = useState(false)
   const [mode, setMode] = useState('')
+  const [operatorOther, setOperatorOther] = useState(false)
+  const [approvedByOther, setApprovedByOther] = useState(false)
 
   const { token, user } = useContext(AuthContext)
 
@@ -18,12 +20,21 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
 
   const inputRefWasteSheets = useRef()
 
+  const inputRefOperatorOther = useRef()
+
+  const inputRefApprovedByOther = useRef()
+
   const handleApprovedBy = (e) => {
+    if (e.target.value === 'Other') setApprovedByOther(true)
+    if (e.target.value !== 'Other') setApprovedByOther(false)
     setValueApprovedBy(e.target.value)
   }
 
   const handleOperator = (e) => {
+    if (e.target.value === 'Other') setOperatorOther(true)
+    if (e.target.value !== 'Other') setOperatorOther(false)
     setValueOperator(e.target.value)
+    //console.log("🚀 ~ file: InPress.jsx:30 ~ handleOperator ~ e.target.value:", e.target.value)
   }
 
   const handleMode = (e) => {
@@ -145,8 +156,8 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
           missingQty:"",
           signedBy:"",
           csr: "",
-          operator: valueOperator,
-          approved: valueApprovedBy,
+          operator: operatorOther ? inputRefOperatorOther.current.value : valueOperator,
+          approved: approvedByOther ? inputRefApprovedByOther.current.value : valueApprovedBy,
           totalGoodS: inputRefGoodSheets.current.value,
           totalWastedS: inputRefWasteSheets.current.value,
           mode: mode,
@@ -187,10 +198,26 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
             Operator:
           </Typography>
           <SelectInput age={valueOperator} handleChange={handleOperator} valorData={optionsModalDsr.arrayData[0].operator} />
+          {operatorOther &&
+            <>
+              <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+                Other:
+              </Typography>
+              <TextField id="standard-basic" label="" variant="standard" type="text" inputRef={inputRefOperatorOther} fullWidth />
+            </>
+          }
           <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
             Approved By:
           </Typography>
           <SelectInput age={valueApprovedBy} handleChange={handleApprovedBy} valorData={optionsModalDsr.arrayData[0].approved} />
+          {approvedByOther &&
+            <>
+              <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
+                Other:
+              </Typography>
+              <TextField id="standard-basic" label="" variant="standard" type="text" inputRef={inputRefApprovedByOther} fullWidth />
+            </>
+          }
           <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
             Total Good Sheets:
           </Typography>

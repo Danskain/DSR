@@ -88,6 +88,11 @@ export const MagentoOrderId = () => {
       setHidemImages(`https://prestodemos.com/dsr/img/big/${idwebsite}_${id}.png`)
       setSelectedFile([])
       setSelectedFileEmail([])
+      setSelectCommentTemplateDocket({
+        commentTemplate: [],
+        comment: '',
+        docketHeader: []  
+      })
     }, [location]);
 
     const { token, logout } = useContext(AuthContext)
@@ -317,7 +322,7 @@ export const MagentoOrderId = () => {
             label: 'Carrier:',
             typeCtrl: 'input',
             event: true,
-            value: cero.dsr__shipping_services_name,
+            value: cero.dsr__shipping_services,
             arraySelect: []
           }
         }
@@ -563,6 +568,7 @@ export const MagentoOrderId = () => {
                    setSelectedFile={setSelectedFile}
                    selectedFileEmail={selectedFileEmail}
                    setSelectedFileEmail={setSelectedFileEmail}
+                   setSelectCommentTemplateDocket={setSelectCommentTemplateDocket}
                  />,
             SALES: <MagentoOrderInformationSales
                      setesArrayResult={setesArray}

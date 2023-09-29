@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Navbar } from '../../layout/index'
-import { Flagship, Detrack, Dsr, NotFound, Dh1, Accounting, Magento, Links, ProductDie, Producction, TemplateEmailStatus, HistoryIssues, Inventory } from '../pages'
+import { Flagship, Detrack, Dsr, NotFound, Dh1, Accounting, Magento, Links, ProductDie, Producction, TemplateEmailStatus, HistoryIssues, Inventory, Scan } from '../pages'
 import { MagentoOrderId } from '../../drs/components'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
@@ -29,6 +29,7 @@ export const DsrRoutes = () => {
           <Route path='template_email_status' element={<TemplateEmailStatus setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />} />
           <Route path='history_issues' element={<HistoryIssues setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />} />
           <Route path='inventory' element={<Inventory setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />} />
+          <Route path='scan' element={<Scan setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions} />} />
 
           <Route path='notFound' element={<NotFound />} />
           {/* <Route path='hero/:id' element={<HeroPage />} /> */}

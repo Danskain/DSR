@@ -66,7 +66,7 @@ export const Login = () => {
           const { navbar, tabs } = data
           const [cero] = dataUser
           setLoading(false)
-          logins(cero.user__name, navbar, tabs, token, dataMenuUser)
+          logins(cero, navbar, tabs, token, dataMenuUser)
         }
       })
       .catch(error => console.log(error))
