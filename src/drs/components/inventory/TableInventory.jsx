@@ -21,9 +21,10 @@ import {
 //import { AuthContext } from '../../../auth/context/AuthContext'
 //import { BottonOrder } from '../BottonOrder'
 //import { ProductDieCell } from '../productDie';
-import { Box, Backdrop, styled, CircularProgress, Button } from '@mui/material'
+import { Box, Backdrop, styled, CircularProgress, Button, IconButton } from '@mui/material'
 import { AddModify } from './modal'
 import { apiRest } from '../../../logic/constantes'
+import EditIcon from '@mui/icons-material/Edit'
 
 //import { apiRest } from '../../../logic/constantes'
 
@@ -133,7 +134,7 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
     dataManufacturer: []
   })
   
-  const { token } = useContext(AuthContext)
+  const { token, logout } = useContext(AuthContext)
 
   useEffect(() => {
     if(rows.length >= 9) {
@@ -167,17 +168,17 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
     return resultado
   } */
 
-  /* const fetchDataProductDie = async () => {
+  const fetchDataInventory = async () => {
     const request = {
       token
     }
-    request.option = 'dieCut'
-    request.controller = 'dsr'
+    request.option = 'listInventory'
+    request.controller = 'inventory'
     //request.optionIssues = '2'
 
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      //headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(request)
     }
 
@@ -185,16 +186,14 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
       .then(response => response.json())
       .then(datas => {
         const { data, message, type } = datas
-        
         if (type === 'ok') {
           const dararesult = data.map((da) => {
             return {
               ...da,
-              id: da.die_cut__id,
-              die_cut__pocket_size: formartJson(da.die_cut__pocket_size),
-              die_cut__panel_size: formartJson(da.die_cut__panel_size),
+              id: da.inventory__id,
             }
           })
+          
           setRows(dararesult)
         }
 
@@ -213,7 +212,7 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
       .finally(() => {
         handleClose()
       })
-  } */
+  }
 
   const fetchDataManufactorer = async () => {
     const request = {
@@ -235,7 +234,6 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
         const { dataManufacturer, message, type } = datas
         
         if (type === 'ok') {
-          console.log("dataManufacturer:", dataManufacturer)
           setDataModalInventory({
             ...dataModalInventory,
             dataManufacturer
@@ -254,14 +252,14 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
         }
       })
       .catch(error => console.log(error))
-      .finally(() => {
+      /* .finally(() => {
         handleClose()
-      })
+      }) */
   }
 
   useEffect(() => {
-    //handleOpen()
-    //fetchDataProductDie()
+    handleOpen()
+    fetchDataInventory()
     fetchDataManufactorer()
   }, [])
   
@@ -273,7 +271,7 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
       headerClassName: 'super-app-theme--header',
     },
     {
-      field: 'name',
+      field: 'inventory__name',
       headerName: 'Name',
       //width: 120,
       flex: 1,
@@ -281,15 +279,15 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
       headerClassName: 'super-app-theme--header',
     },
     {
-      field: 'ska',
-      headerName: 'Ska',
+      field: 'inventory__sku',
+      headerName: 'Sku',
       //width: 200,
       editable: true,
       flex: 1,
       headerClassName: 'super-app-theme--header',
     },
     {
-      field: 'area',
+      field: 'inventory__area',
       headerName: 'Area',
       //width: 200,
       editable: true,
@@ -297,7 +295,7 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
       headerClassName: 'super-app-theme--header',
     },
     {
-      field: 'manufactures',
+      field: 'inventory__id_manufacturer',
       headerName: 'Manufactures',
       //width: 200,
       editable: true,
@@ -314,12 +312,11 @@ export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
     },
     {
       field: 'actions',
-      type: 'actions',
       headerName: 'Actions',
-      width: 100,
+      width: 70,
       cellClassName: 'actions',
       headerClassName: 'super-app-theme--header',
-      
+      renderCell: ({row}) => <IconButton sx={{ color: 'red' }} aria-label='upload picture' component='label' onClick={() => alert(row.id)}><EditIcon style={{ fontSize: '25px' }}/></IconButton>
     },
   ]
 

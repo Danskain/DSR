@@ -29,7 +29,7 @@ export const ModalUsers = ({
   const [dataUserProfile, setDataUserProfile] = useState([])
   const [dataUserInformation, setDataUserInformation] = useState([])
 
-  const { token } = useContext(AuthContext)
+  const { token, logout } = useContext(AuthContext)
 
   const fetchDataUser = async () => {
     const request = {

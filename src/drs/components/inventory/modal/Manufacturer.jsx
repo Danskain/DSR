@@ -24,7 +24,7 @@ export const Manufacturer = ({dataModalInventory, setAlertsOptions, setOpenAlert
     manufacturer__phone: ''
   })
 
-  const { token } = useContext(AuthContext)
+  const { token, logout } = useContext(AuthContext)
 
   const limpearInputs = () => {
     setSelectDataManufacture('')
@@ -104,9 +104,9 @@ export const Manufacturer = ({dataModalInventory, setAlertsOptions, setOpenAlert
 
   const fetchUpdateManufacture = async (request) => {
     request.token = token
-    request.option = newEditManufacture ? 'saveManufacturer' : 'updateManufacturer'
+    request.option = newEditManufacture ? 'updateManufacturer' : 'saveManufacturer'
     request.controller = 'inventory'
-    if (!newEditManufacture) {
+    if (newEditManufacture) {
       request.manufacturerId = selectDataManufacture
     }
 
@@ -129,9 +129,9 @@ export const Manufacturer = ({dataModalInventory, setAlertsOptions, setOpenAlert
           })
           setOpenAlerts(true)
           fetchDataManufactorer()
-          /* if (!newM) {
-            
-          } */
+          if (!newEditManufacture) {
+            limpearInputs()
+          }
         }
 
         if (type === 'error') {
@@ -181,7 +181,7 @@ export const Manufacturer = ({dataModalInventory, setAlertsOptions, setOpenAlert
   return (
     <div>
         <Typography variant='h5' align='center' sx={{ backgroundColor: '#00A1E0', borderRadius: '10px 10px 0 0', color: 'white', paddingLeft: '10px', fontSize: '22px' }}>
-          Add Manufacturer
+          Manufacturer
         </Typography>
             <Box
               style={{ padding: 15 }}
@@ -193,7 +193,7 @@ export const Manufacturer = ({dataModalInventory, setAlertsOptions, setOpenAlert
               >
                 <Grid item xs={2} sm={4} md={12}>
                   <Item>
-                    {!newEditManufacture &&
+                    {newEditManufacture &&
                       <div style={{ width: '100%', padding: '0 20% 0 20%' }}>
                         <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '14px' }}>
                           
@@ -211,9 +211,9 @@ export const Manufacturer = ({dataModalInventory, setAlertsOptions, setOpenAlert
                           variant="filled"
                         >
                           {dataModalInventory.dataManufacturer.map((option) => (
-                              <MenuItem key={option.manufacturer__id} value={option.manufacturer__id}>
+                            <MenuItem key={option.manufacturer__id} value={option.manufacturer__id}>
                               {`${option.manufacturer__name}`}
-                              </MenuItem>
+                            </MenuItem>
                           ))}
                         </TextField>
                       </div>
@@ -306,7 +306,7 @@ export const Manufacturer = ({dataModalInventory, setAlertsOptions, setOpenAlert
                         variant="contained"
                         onClick={saveModifiedTemplate}
                       >
-                        {newEditManufacture ? 'save' : 'modified'}
+                        {newEditManufacture ? 'modified' : 'save'}
                       </LoadingButton>
                       <Button
                         variant='contained'
