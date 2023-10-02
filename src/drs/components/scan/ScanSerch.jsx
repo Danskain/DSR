@@ -7,6 +7,7 @@ import CleaningServicesIcon from '@mui/icons-material/CleaningServices'
 //import { shadeTextFieldStylesHook } from '@mui-treasury/styles/textField/shade'
 import { apiRest } from '../../../logic/constantes'
 import { Alerts } from '../../components'
+import { ModalDsr } from '../modalDsrStatus'
 
 
 export const ScanSerch = () => {
@@ -15,8 +16,20 @@ export const ScanSerch = () => {
   const [alertsOptions, setAlertsOptions] = useState({})
   const [openAlerts, setOpenAlerts] = useState(false)
   const [valueSerch, setValueSerch] = useState('')
+  const [optionsModalDsr, setOptionsModalDsr] = useState({})
+  const [openModal, setOpenModal] = useState(false)
 
   const { token, user } = useContext(AuthContext)
+
+  const handleOpenModal = () => setOpenModal(true)
+  /* const handleCloseModal = () => {
+    setOpenModal(false)
+  } */
+
+  const handleCloseModal = (event, reason) => {
+    if (reason === 'backdropClick') return
+    setOpenModal(false);
+  }
 
   const validationSerch = (e) => {
     const validate = /^[0-9]+$/.test(e.target.value)
@@ -49,14 +62,20 @@ export const ScanSerch = () => {
       .then(response => response.json())
       .then(datas => {
         const { message, type } = datas
-        
+        console.log("datas:", datas)
+        const optionsModalDsrResult = {...datas}
+        optionsModalDsrResult.idOption = '4'
+        optionsModalDsrResult.mgOrder = valueSerch
         ///inputRef.current.value = ''
         if (type === 'ok') {
+          setOptionsModalDsr(optionsModalDsrResult)
+          handleOpenModal()
+          /* handleOpenModal()
           setAlertsOptions({
             types: 'success',
             message
           })
-          setOpenAlerts(true)  
+          setOpenAlerts(true) */  
         }
         if (type === 'error') {
             
@@ -126,7 +145,7 @@ export const ScanSerch = () => {
           //inputRef={inputRef}
           value={valueSerch}
           onChange={validationSerch}
-          sx={{ pl: 1, width: '100%', height: '90%', color: 'white', backgroundColor: '#A4B6CE', borderRadius: '5px', ml: '5px', fontSize: '50px' }}
+          sx={{ pl: 1, width: '100%', height: '90%', color: 'white', backgroundColor: '#A4B6CE', borderRadius: '15px', ml: '5px', fontSize: '50px' }}
           placeholder='Search'
           inputProps={{ 'aria-label': 'search' }}
           //type='number'
@@ -142,6 +161,18 @@ export const ScanSerch = () => {
         </IconButton>
       </Paper>
       <Alerts open={openAlerts} setOpen={setOpenAlerts} alertsOptions={alertsOptions} />
+      <ModalDsr
+        setOpenAlerts={setOpenAlerts}
+        setAlertsOptions={setAlertsOptions}
+        optionsModalDsr={optionsModalDsr}
+        handleCloseModal={handleCloseModal}
+        openModal={openModal}
+        /* idwebsite={params.row.dsr_websiteId}
+        valueSelect={age}
+        params={params}
+        idButtonData={idButtonData}
+        setValueEstado={setValueEstado} */
+      />
     </form>
   )
 }

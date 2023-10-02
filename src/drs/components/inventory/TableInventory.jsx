@@ -1,5 +1,6 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { AuthContext } from '../../../auth/context/AuthContext'
 import {
   //GridRowModes,
   DataGrid,
@@ -22,6 +23,7 @@ import {
 //import { ProductDieCell } from '../productDie';
 import { Box, Backdrop, styled, CircularProgress, Button } from '@mui/material'
 import { AddModify } from './modal'
+import { apiRest } from '../../../logic/constantes'
 
 //import { apiRest } from '../../../logic/constantes'
 
@@ -121,12 +123,17 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   ...customCheckbox(theme)
 }))
 
-export const TableInventory = () => {
+export const TableInventory = ({setOpenAlerts, setAlertsOptions}) => {
   const [rows, setRows] = useState([])
   const [open, setOpen] = useState(false)
   const [heightDate, setHeightDate] = useState(true)
   const [openModal, setOpenModal] = useState(false)
-  //const { token } = useContext(AuthContext)
+  const [dataModalInventory, setDataModalInventory] = useState({
+    idOpcion: '',
+    dataManufacturer: []
+  })
+  
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
     if(rows.length >= 9) {
@@ -140,13 +147,16 @@ export const TableInventory = () => {
   
   const handleOpen = () => setOpen(true)
   
-
   const handleOpenModal = () => setOpenModal(true)
   const handleCloseModal = () => setOpenModal(false)
 
-
-
-  const handleManufacture = () => alert('Manufacture')
+  const handleManuInventory = (text) => {
+    setDataModalInventory({
+      ...dataModalInventory,
+      idOpcion: text
+    })
+    handleOpenModal()
+  }
 
   /* const formartJson = (text) => {
     const arrayResilt = JSON.parse(text)
@@ -205,10 +215,55 @@ export const TableInventory = () => {
       })
   } */
 
-  /* useEffect(() => {
-    handleOpen()
-    fetchDataProductDie()
-  }, []) */
+  const fetchDataManufactorer = async () => {
+    const request = {
+      token
+    }
+    request.option = 'listManufacturer'
+    request.controller = 'inventory'
+    //request.optionIssues = '2'
+
+    const requestOptions = {
+      method: 'POST',
+      //headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(request)
+    }
+
+    fetch(apiRest, requestOptions)
+      .then(response => response.json())
+      .then(datas => {
+        const { dataManufacturer, message, type } = datas
+        
+        if (type === 'ok') {
+          console.log("dataManufacturer:", dataManufacturer)
+          setDataModalInventory({
+            ...dataModalInventory,
+            dataManufacturer
+          })
+        }
+
+        if (type === 'error') {
+          setAlertsOptions({
+            types: type,
+            message
+          })
+          setOpenAlerts(true)
+          if (message === 'invalid token') {
+            logout()
+          }
+        }
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        handleClose()
+      })
+  }
+
+  useEffect(() => {
+    //handleOpen()
+    //fetchDataProductDie()
+    fetchDataManufactorer()
+  }, [])
   
   const columns = [
     {
@@ -270,15 +325,15 @@ export const TableInventory = () => {
 
   function CustomToolbar() {
     return (
-      <GridToolbarContainer  style={{backgroundColor: /* '#CACFD2' *//* '#433F3F' */'#0166C6', borderBottom: '#fafafa 2px solid', padding: '5px',}}>
+      <GridToolbarContainer  style={{backgroundColor: '#0166C6', borderBottom: '#fafafa 2px solid', padding: '5px',}}>
         <GridToolbarColumnsButton style={{color: 'white', backgroundColor: '#00A1E0'}} />
         <GridToolbarFilterButton style={{color: 'white', backgroundColor: '#00A1E0'}} />
         {/* <GridToolbarDensitySelector /> */}
         {/* <GridToolbarExport style={{color: 'white', backgroundColor: '#00A1E0'}} /> */}
-        <Button color="primary" style={{color: 'white', backgroundColor: '#00A1E0', fontSize: '12px'}} startIcon={<AddIcon />} onClick={handleOpenModal}>
+        <Button color="primary" style={{color: 'white', backgroundColor: '#00A1E0', fontSize: '12px'}} startIcon={<AddIcon />} onClick={() =>handleManuInventory('add')}>
           Add 
         </Button>
-        <Button color="primary" style={{color: 'white', backgroundColor: '#00A1E0', fontSize: '12px'}} startIcon={<AddIcon />} onClick={handleManufacture}>
+        <Button color="primary" style={{color: 'white', backgroundColor: '#00A1E0', fontSize: '12px'}} startIcon={<AddIcon />} onClick={() =>handleManuInventory('manufacturer')}>
           Manufacturer
         </Button>
       </GridToolbarContainer>
@@ -298,18 +353,18 @@ export const TableInventory = () => {
           boxShadow: 2,
           border: 2,
           borderColor: '#fafafa',
-            '& .MuiDataGrid-cell:hover': {
-              color: 'primary.main'
-            },
-            '& .super-app-theme--header': {
-              backgroundColor: '#0166C6',
-              //backgroundColor: '#CACFD2',
-            },
-            '& .MuiDataGrid-footerContainer': {
-              //backgroundColor: '#CACFD2',
-              //backgroundColor: '#433F3F',
-              backgroundColor: '#0166C6',
-            },
+          '& .MuiDataGrid-cell:hover': {
+            color: 'primary.main'
+          },
+          '& .super-app-theme--header': {
+            backgroundColor: '#0166C6',
+            //backgroundColor: '#CACFD2',
+          },
+          '& .MuiDataGrid-footerContainer': {
+            //backgroundColor: '#CACFD2',
+            //backgroundColor: '#433F3F',
+            backgroundColor: '#0166C6',
+          },
         }}
         rows={rows}
         columns={columns}
@@ -351,8 +406,12 @@ export const TableInventory = () => {
         <CircularProgress color='inherit' />
       </Backdrop>
       <AddModify
+        dataModalInventory={dataModalInventory}
         openModal={openModal}
         handleCloseModal={handleCloseModal}
+        setAlertsOptions={setAlertsOptions}
+        setOpenAlerts={setOpenAlerts}
+        fetchDataManufactorer={fetchDataManufactorer}
       />
     </Box>
   )

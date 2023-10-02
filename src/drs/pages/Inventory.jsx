@@ -1,8 +1,8 @@
 import { TableInventory } from '../components/inventory'
-export const Inventory = () => {
+export const Inventory = ({setOpenAlerts, setAlertsOptions}) => {
   return (
     <>
-      <TableInventory />
+      <TableInventory setOpenAlerts={setOpenAlerts} setAlertsOptions={setAlertsOptions}/>
     </>
   )
 }

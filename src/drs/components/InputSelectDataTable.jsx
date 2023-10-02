@@ -285,8 +285,23 @@ export const InputSelectDataTable = ({datasMapping, dataInputSelect, params, fla
           if (!recuperadoPacking) {
             localStorage.setItem('packing', JSON.stringify(arregloPacking))
           }else{
-            recuperadoPacking.push(objPacking)
-            localStorage.setItem('packing', JSON.stringify(recuperadoPacking))
+            const recuperadoPackingModify = recuperadoPacking.some(e => e.id === objPacking.id)
+            //console.log("recuperadoPackingModify:", recuperadoPackingModify)
+            if (recuperadoPackingModify) {
+              const recuperadoPackingModifyMap = recuperadoPacking.map((e) => {
+                if (e.id === objPacking.id) {
+                  return {
+                    ...e,
+                    value: objPacking.value
+                  }
+                }
+                return e
+              })
+              localStorage.setItem('packing', JSON.stringify(recuperadoPackingModifyMap))
+            }else{
+              recuperadoPacking.push(objPacking)
+              localStorage.setItem('packing', JSON.stringify(recuperadoPacking))
+            }
           }
           //setValor(age)
           inputRefValue.current = age

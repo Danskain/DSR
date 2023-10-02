@@ -113,7 +113,7 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
     fetch(apiRest, requestOptions)
       .then(response => response.json())
       .then(datas => {
-        const { type, snEmail } = datas
+        const { type, snEmail, message } = datas
         if (type === 'ok') {
           if (snEmail) {
             sweetalert2FunctionSave()
@@ -125,17 +125,20 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
           setOpenAlerts(true)
           setLoadingSave(false)
           handleCloseModal()
-          document.getElementById(`tab-${idButtonData}`).click()
-          setValueEstado(true)
+          if (params) {
+            document.getElementById(`tab-${idButtonData}`).click()
+            setValueEstado(true)
+          }
         }
 
         if (type === 'error') {
-           ({
+          setAlertsOptions({
             types: type,
-            message: 'I do not save'
+            message
           })
           setOpenAlerts(true)
           setLoadingSave(false)
+          handleCloseModal()
         } 
       
       })
@@ -148,8 +151,8 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
       {
         status: {
           user: user.name, 
-          idWebsite: params.row.dsr_websiteId, 
-          mgOrder: params.row.dsr_order,
+          idWebsite: params ? params.row.dsr_websiteId : optionsModalDsr.idwebsite, 
+          mgOrder: params ? params.row.dsr_order : optionsModalDsr.mgOrder,
           qtyBoxes:"",
           qtyPerBox:"",
           qtyLastBox:"",
@@ -162,7 +165,7 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
           totalWastedS: inputRefWasteSheets.current.value,
           mode: mode,
           comment: "",
-          packing: params.row.dsr_packing
+          packing: params ? params.row.dsr_packing : optionsModalDsr.packing
         },
         calendar: {
           measure:"",
@@ -175,7 +178,7 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
     ]
 
     const requestMagento = {
-      status: valueSelect,
+      status: valueSelect ? valueSelect : optionsModalDsr.status,
       typeOption: 'save',
       arrayData: arrayData
     }
@@ -197,7 +200,7 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
           <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
             Operator:
           </Typography>
-          <SelectInput age={valueOperator} handleChange={handleOperator} valorData={optionsModalDsr.arrayData[0].operator} />
+          <SelectInput age={valueOperator} handleChange={handleOperator} valorData={optionsModalDsr.arrayData ? optionsModalDsr.arrayData[0].operator :  optionsModalDsr.operator} />
           {operatorOther &&
             <>
               <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
@@ -209,7 +212,7 @@ export const InPress = ({optionsModalDsr, handleCloseModal, valueSelect, params,
           <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
             Approved By:
           </Typography>
-          <SelectInput age={valueApprovedBy} handleChange={handleApprovedBy} valorData={optionsModalDsr.arrayData[0].approved} />
+          <SelectInput age={valueApprovedBy} handleChange={handleApprovedBy} valorData={optionsModalDsr.arrayData ? optionsModalDsr.arrayData[0].approved :  optionsModalDsr.approved} />
           {approvedByOther &&
             <>
               <Typography variant='string' style={{ fontWeight: 'bold', fontSize: '15px' }}>
