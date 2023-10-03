@@ -421,7 +421,7 @@ export const InputSelectDataTable = ({datasMapping, dataInputSelect, params, fla
   const hidenOptionsImagesDeliveryPacking = (text) => {
     const objOrdanamiento = {
         'PICK UP': <img src='https://prestodemos.com/dsr/img/pickup.png' alt="" style={{ width: '100%', height:'100%', /* marginLeft: '14%' */ }} />,
-        'UPS / CANPAR / PUROLATOR': <img src='https://prestodemos.com/dsr/img/ups.png' alt="" style={{ width: '70%', height:'70%', marginLeft: '15%' }} />,
+        'UPS / CANPAR / PUROLATOR': <img src='https://prestodemos.com/dsr/img/ups.png' alt="" style={{ width: '65%', height:'65%', marginLeft: '15%' }} />,
         'DRIVER - DELIVERY TOMORROW': <img src='https://prestodemos.com/dsr/img/truck.png' alt="" style={{ width: '100%', height:'100%', /* marginLeft: '16%' */ }} />,
         'UPS OVERNIGHT EXPRESS LABEL': <img src='https://prestodemos.com/dsr/img/plain.png' alt="" style={{ width: '60%', height:'100%', marginLeft: '18%' }} />,
         'TRACK TO SHIP OVERNIGHT EXPRESS': <img src='https://prestodemos.com/dsr/img/plain.png' alt="" style={{ width: '60%', height:'100%', marginLeft: '18%' }} />,

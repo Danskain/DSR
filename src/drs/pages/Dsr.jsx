@@ -12,6 +12,7 @@ import {
   GridToolbarContainer,
   GridToolbarColumnsButton,
   GridToolbarFilterButton,
+  GridToolbarDensitySelector
 } from '@mui/x-data-grid'
 import {
   DsrEditDescriptionIssues,
@@ -72,6 +73,11 @@ export const Dsr = ({setOpenAlerts, setAlertsOptions }) => {
 
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({
     id: false,
+  });
+
+  const [paginationModel, setPaginationModel] = useState({
+    pageSize: 25,
+    page: 0,
   });
   
   const inputRefDescription = useRef()
@@ -911,7 +917,23 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
       });
   }
 
+  const backupColums = () => {
+    const miObjetoRecuperado = JSON.parse(localStorage.getItem('visibilityColums'))
+    if (miObjetoRecuperado) {
+      setColumnVisibilityModel(miObjetoRecuperado)
+    }
+  }
+
+  const backupPagination = () => {
+    const miObjetoRecuperado = JSON.parse(localStorage.getItem('pagination'))
+    if (miObjetoRecuperado) {
+      setPaginationModel(miObjetoRecuperado)
+    }
+  }
+
   useEffect(() => {
+    backupColums()
+    backupPagination()
     fetchDataTwo()
   }, [])
 
@@ -932,6 +954,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 
   const reference = (ref, id, name) => {
     localStorage.removeItem('packing')
+    //backupColums()
     changeColor(id)
     setNameTab(name)
     if(name === 'Issues'){
@@ -1065,6 +1088,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
       <GridToolbarContainer style={{backgroundColor: '#0166C6', borderBottom: '#fafafa 2px solid', padding: '5px'}} >
         <GridToolbarColumnsButton style={{color: 'white', backgroundColor: '#00A1E0'}} />
         <GridToolbarFilterButton style={{color: 'white', backgroundColor: '#00A1E0'}} />
+        <GridToolbarDensitySelector style={{color: 'white', backgroundColor: '#00A1E0'}} />
         {hidemSaveIssues ?
           <Stack
             direction="row"
@@ -1235,6 +1259,20 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
     id: false
   } */
 
+  const visibilityColums = (newModel) => {
+    
+    localStorage.setItem('visibilityColums', JSON.stringify(newModel))
+    
+    setColumnVisibilityModel(newModel)
+  }
+
+  const paginationBackup = (newModel) => {
+    
+    localStorage.setItem('pagination', JSON.stringify(newModel))
+    
+    setPaginationModel(newModel)
+  }
+
   return (
     <>
       <Stack
@@ -1301,25 +1339,16 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
           slots={{
             toolbar: CustomToolbar,
           }}
-          initialState={{
-            /* columns: {
-              columnVisibilityModel:  {
-                id: false,
-              },
-              //columnVisibilityModel: columnVisibilityModelRE,
-            }, */
-            pagination: {
-              paginationModel: {
-                pageSize: 25
-              }
-            }
-          }}
+          /*    */
+          paginationModel={paginationModel}
+          onPaginationModelChange={paginationBackup}
 
           columnVisibilityModel={columnVisibilityModel}
-          onColumnVisibilityModelChange={(newModel) => {
+          /* onColumnVisibilityModelChange={(newModel) => {
             setColumnVisibilityModel(newModel)
           }
-          }
+          } */
+          onColumnVisibilityModelChange={visibilityColums}
           /* slotProps={{
             toolbar: {
               disableexport: true, // Desactivar el botón de exportación
